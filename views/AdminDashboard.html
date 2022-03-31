@@ -1,0 +1,103 @@
+<html>
+    <link rel="stylesheet" href="/css/adminpanel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+
+<head>
+    <title>
+        StudyMaid - Profile
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+
+<body>
+<nav>
+    <div class="menu-items">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/dashboard">
+                <i class="uil uil-estate"></i>
+                <span class="link-name">Dashboard</span>
+            </a></li>
+            <li><a href="#">
+                <i class="uil uil-files-landscapes"></i>
+                <span class="link-name">Study</span>
+            </a></li>
+            <li><a href="#">
+                <i class="uil uil-chart"></i>
+                <span class="link-name">Settings</span>
+            </a></li>
+
+        </ul>
+        
+        <ul class="logout-mode">
+            <li><a href="#">
+                <i class="uil uil-signout"></i>
+                <span class="link-name">Logout</span>
+            </a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="dashboard">
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+
+        <div class="search-box">
+            <i class="uil uil-search"></i>
+            <input type="text" id="usersearchbar" placeholder="Search here..." value>
+        </div>
+
+    </div>
+
+    <div class="UserList" id="userlist">
+
+</section>
+
+</div>
+
+<div class="overlay" id="overlay" hidden>
+    <div class="UserProfile">
+        <div id="userprofileimage" class="userprofileimage"></div>
+        <div>
+            <p class= "profiletext" id="userprofileheader">HEADER</span>
+            <p class= "profiletext" id="userprofilerank">HEADER</span>
+            <p class= "profiletext" id="userprofiletotalstudytime">HEADER</span>
+        </div>
+
+        <p id="actionslabel"> ACTIONS </p>
+        <hr>
+
+        <div>
+            <button id="suspenduser">Suspend User</button>
+            <button id="resetuserdata">Reset User Data</button>
+            <button id="resetpassword">Reset Password</button>
+        </div>
+        <div>
+            <select id="rank">
+                <option>Moderator</option>
+                <option>Support Staff</option>
+                <option>Teacher</option>
+                <option>Tier 3</option>
+                <option>Tier 2</option>
+                <option>Tier 1</option>
+            </select>
+            <button id="changeuserrole">Change rank</button>
+        </div>
+        <div>
+            <input type="text" placeholder="Enter new name...">
+            <button id="changename">Change Name</button>
+        </div>
+        <div>
+            <button id="closeuserprofile">CLOSE</button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="/js/AdminPanel.js"></script>
+
+</html>

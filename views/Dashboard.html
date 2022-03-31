@@ -1,0 +1,80 @@
+<html>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+
+<head>
+    <title>
+        StudyMaid - Profile
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+
+<body>
+<nav>
+    <div class="menu-items">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="">
+                <i class="uil uil-estate"></i>
+                <span class="link-name">Dashboard</span>
+            </a></li>
+            <li><a href="/study">
+                <i class="uil uil-files-landscapes"></i>
+                <span class="link-name">Study</span>
+            </a></li>
+            <li><a href="#">
+                <i class="uil uil-chart"></i>
+                <span class="link-name">Settings</span>
+            </a></li>
+
+        </ul>
+        
+        <ul class="logout-mode">
+            <li><a href="/logout">
+                <i class="uil uil-signout"></i>
+                <span class="link-name">Logout</span>
+            </a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="dashboard">
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle"></i>
+    </div>
+
+    <div class="dash-content">
+        <div class="overview">
+            <div class="title">
+                <p id="greet"></p>
+                <p id="qotd"></p>
+            </div>
+
+            <div class="boxes">
+                <div class="box studytime">
+                    <i class="uil uil-thumbs-up"></i>
+                    <span class="text">Study Time</span>
+                    <span class="text" id = "studytime">5h</span>
+                </div>
+                <div class="box rank" id ='userrankbox'>
+                    <i class="uil uil-share"></i>
+                    <span class="text">Rank</span>
+                    <span class="text" id="userrank">Head Maid</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+
+</section>
+
+</body>
+
+<script src="js/dashboard.js"></script>
+
+</html>

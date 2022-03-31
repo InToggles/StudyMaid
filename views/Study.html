@@ -1,0 +1,75 @@
+<html>
+    <link rel="stylesheet" href="css/Study.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+
+<head>
+    <title>
+        StudyMaid - Profile
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+
+<body>
+<nav>
+    <div class="menu-items">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/dashboard">
+                <i class="uil uil-estate"></i>
+                <span class="link-name">Dashboard</span>
+            </a></li>
+            <li><a href="#">
+                <i class="uil uil-files-landscapes"></i>
+                <span class="link-name">Study</span>
+            </a></li>
+            <li><a href="#">
+                <i class="uil uil-chart"></i>
+                <span class="link-name">Settings</span>
+            </a></li>
+
+        </ul>
+        
+        <ul class="logout-mode">
+            <li><a href="#">
+                <i class="uil uil-signout"></i>
+                <span class="link-name">Logout</span>
+            </a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="Page">
+    <div class="Timer" id="Timer">
+        <div class ="TimeCounter" id="TimeCounter">
+            <div><span id="currenttime">0</span></div>
+            <div><span id="cdtime" hidden>0</span></div>
+            <div>
+                <span id="countdownsettings">
+                    <input dir="rtl" type="number" class="hrinput"  id="hrinput" placeholder="0" min=0 max=24 value=0>
+                    <span>H</span>
+                    <input dir="rtl" type="number" class="mininput" id="mininput" placeholder="0" min=0 max=60 value=0>
+                    <span>M</span>
+                    <input dir="rtl" type="number" class="secinput" id="secinput" placeholder="0" min=0 max=60 value=0>
+                    <span>S</span>
+                </span>
+            </div>
+            <div>
+                <span>
+                    <button class="starttimer" id="starttimer" type="submit">START</button>
+                    <button class="endtimer" id="endtimer" type="submit" hidden>END</button>
+                    <button class="pausetimer" id="pausetimer" type="submit" hidden>PAUSE</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+
+<script src="/js/Study.js"></script>
+
+</html>
