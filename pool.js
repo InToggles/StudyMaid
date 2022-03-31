@@ -1,8 +1,9 @@
 const util = require('util');
 const mysql = require('mysql');
+console.log(process.env.DATABASE_HOST2, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD)
 /** Connection to the database.**/
 const pool = mysql.createPool({
-    host: process.env.DATABASE_HOST,
+    host: process.env.DATABASE_HOST2,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: "heroku_2a0b36d47694a4d",
