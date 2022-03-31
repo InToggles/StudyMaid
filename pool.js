@@ -2,10 +2,10 @@ const util = require('util');
 const mysql = require('mysql');
 /** Connection to the database.**/
 const pool = mysql.createPool({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE,
+    host: 'us-cdbr-east-05.cleardb.net',
+    user: 'b3096bc9773b7e',
+    password: '3a6acd58',
+    database: 'heroku_2a0b36d47694a4d',
 
 });
 
