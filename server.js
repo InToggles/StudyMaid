@@ -26,11 +26,14 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
 app.use(cookieParser());
+app.keys = ['dieueyf7huienejnfef']
 app.use(cookieSession({
   secret: process.env.SESSION_SECRET,
+  signed: false,
   saveUninitialized: true,
   resave: true
 }));
+
 
 
 app.use(express.urlencoded({ extended: false }))
