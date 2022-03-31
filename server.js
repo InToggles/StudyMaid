@@ -39,8 +39,9 @@ app.use(cookieSession({
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'SESSIONSECRET',
   resave: false,
+  signed: false,
   saveUninitialized: false
 }))
 
