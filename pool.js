@@ -8,6 +8,8 @@ const pool = mysql.createPool({
     database: "heroku_2a0b36d47694a4d",
 });
 
+console.log(pool, "asjdjdjsjjsjs")
+
 pool.getConnection((error, connection) => {
     if(error)
     console.log(connection)
