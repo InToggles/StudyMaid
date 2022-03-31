@@ -6,17 +6,20 @@ const pool = mysql.createPool({
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
-    
+
 });
 
 pool.getConnection((error, connection) => {
-    if(error) 
-        console.error("There was an error connecting to Database.", error);
+    if(error) {
+        console.error("There was an error connecting to Database.", error); 
+    }
     
-    if(connection)
-    console.log("Successfully connected to the Database!")
+    if(connection) {
+        console.log("Successfully connected to the Database!")
         connection.release();
     return;
+    }
+
 });
 
 pool.query = util.promisify(pool.query);
