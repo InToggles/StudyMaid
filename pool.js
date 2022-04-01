@@ -1,13 +1,12 @@
 const util = require('util');
 const mysql = require('mysql');
-console.log(process.env.DATABASE_HOST2, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD)
+console.log(process.env.DB_USER, process.env.DB_HOST, process.env.DB_PASSWORD)
 /** Connection to the database.**/
 const pool = mysql.createPool({
     host: process.env.DB_USER,
     user: process.env.DB_HOST,
     password: process.env.DB_PASSWORD,
     database: process.env.DATABASE,
-    port: 3306
 });
 
 console.log(pool, "asjdjdjsjjsjs")
