@@ -256,8 +256,6 @@ nav.close ~ .dashboard .top{
 }
 .dash-content .title p{
     position: relative;
-    height: 35px;
-    width: 100%;
     padding-left: 5%;
     border-radius: 6px;
     display: flex;
@@ -354,10 +352,16 @@ nav.close ~ .dashboard .top{
         width: calc(100% / 2 - 15px);
         margin-top: 15px;
     }
+    .title p {
+        height: 100px;
+    }
 }
 @media (max-width: 560px) {
     .dash-content .boxes .box{
         width: 100% ;
+    }
+    .title p {
+        height: 100px;
     }
 }
 @media (max-width: 500px) {
@@ -401,5 +405,8 @@ nav.close ~ .dashboard .top{
     }
     .dashboard .top .sidebar-toggle{
         display: none;
+    }
+    .title p {
+        height: 100px;
     }
 }
