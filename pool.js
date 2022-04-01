@@ -10,6 +10,7 @@ const pool = mysql.createPool({
 
 pool.getConnection((error, connection) => {
     if(error) 
+    console.log(pool)
         console.error("There was an error connecting to Database.", error);
     
     if(connection)
