@@ -2,9 +2,9 @@ const util = require('util');
 const mysql = require('mysql');
 /** Connection to the database.**/
 const pool = mysql.createPool({
-    host: process.env.DATABASE_HOST2,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
+    host: process.env.DB_HOST,
+    user: process.env.DB_PASSWORD,
+    password: process.env.DB_USER,
     database: process.env.DATABASE,
 });
 
