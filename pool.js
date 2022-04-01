@@ -1,20 +1,15 @@
 const util = require('util');
 const mysql = require('mysql');
-console.log(process.env.DB_USER, process.env.DB_HOST, process.env.DB_PASSWORD)
 /** Connection to the database.**/
 const pool = mysql.createPool({
-    host: process.env.DB_USER,
-    user: process.env.DB_HOST,
-    password: process.env.DB_PASSWORD,
+    host: process.env.DATABASE_HOST2,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE,
-    ssl: true,
 });
 
-console.log(pool, "asjdjdjsjjsjs")
-
 pool.getConnection((error, connection) => {
-    if(error)
-    console.log(connection)
+    if(error) 
         console.error("There was an error connecting to Database.", error);
     
     if(connection)
