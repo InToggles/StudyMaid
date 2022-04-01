@@ -131,6 +131,8 @@ if (message) {
     document.getElementById('userrankbox').style.backgroundColor = 'rgb(255, 66, 117)'
   } else if (DisplayData.rank == "Head Maid"){
     document.getElementById('userrankbox').style.backgroundColor = 'rgb(66, 255, 183)'
+  } else if (DisplayData.rank == "Faith"){
+    document.getElementById('userrankbox').style.backgroundColor = 'rgb(0, 255, 149)'
   }
 
   if (DisplayData.token == getCookie('token')) {

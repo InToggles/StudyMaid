@@ -210,6 +210,9 @@ app.post('/login',(req, res, next) => {
 
           req.session.user = result;
           req.session.opp = 1;
+
+          console.log(getfieldresult[0].name + " has logged onto the server.")
+
           res.redirect("/dashboard")
         })
       }
@@ -255,6 +258,9 @@ app.post('/register', (req, res, next) => {
     name: req.body.name,
     password: req.body.password
   };
+
+  console.log('Registering user. Data : ', userInput)
+
   user.CreateNewAccount(userInput, function(lastId) {
     if(lastId) {
         user.find(lastId, function(result) {
