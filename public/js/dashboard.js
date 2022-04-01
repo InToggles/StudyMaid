@@ -71,7 +71,7 @@ function Show_Panel(type) {
     const i = document.createElement('i')
     const span = document.createElement('span')
     span.className = "link-name"
-    i.className = "uil uil-chart"
+    i.className = "uil uil-lock-access"
 
     if (type == "Admin") {
       a.href = "dashboard/admin"
@@ -139,16 +139,6 @@ if (message) {
     Show_Panel(DisplayData.rank)
   }
 
-  function generate() {
-    let id = () => {
-      return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
-    }
-      console.log(id())
-    }
-
-    generate()
 }
 
 /* const Interval = setInterval(ChangeTimer, 1000); */

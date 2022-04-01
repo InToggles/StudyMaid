@@ -68,7 +68,7 @@ function Show_Panel(type) {
     const i = document.createElement('i')
     const span = document.createElement('span')
     span.className = "link-name"
-    i.className = "uil uil-chart"
+    i.className = "uil uil-lock-access"
 
     if (type == "Admin") {
       a.href = "dashboard/admin"
