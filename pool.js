@@ -7,6 +7,7 @@ const pool = mysql.createPool({
     user: process.env.DB_HOST,
     password: process.env.DB_PASSWORD,
     database: process.env.DATABASE,
+    ssl: true,
 });
 
 console.log(pool, "asjdjdjsjjsjs")
