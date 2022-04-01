@@ -125,7 +125,8 @@ User.prototype = {
                 for(prop in body){
                     bind.push(body[prop]);
                 }
-                let sql = `INSERT INTO users(name, password) VALUES (?, ?)`;
+                bind.push("Default")
+                let sql = `INSERT INTO users(name, password, rank) VALUES (?, ?, ?)`;
                 pool.query(sql, bind, function(err, result) {
                     if(err) throw err;
                     console.log("Successfully created a new user.")
