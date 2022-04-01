@@ -47,7 +47,7 @@ function getCookie(cname) {
 
 function CallServer(Data, callback) {
   var request = new XMLHttpRequest();
-  var path = "http://127.0.0.1:3000/"; // enter your server ip and port number
+  var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
   request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       callback(this.responseText)
