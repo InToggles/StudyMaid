@@ -137,7 +137,6 @@ router.get('/', (req, res, next) => {
 // Main
 
 app.get('/', (req, res) => {
-  res.addHeader("Access-Control-Allow-Origin", "*");
   res.render('Home.ejs', {})
 })
 
