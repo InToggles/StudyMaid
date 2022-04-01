@@ -75,7 +75,6 @@ function RequestData(Data, Field, Callback) {
 // ========= CLIENT REQUEST HANDLER ========= //
 
 app.post("/",  (req, res, next) => { 
-  console.log(req)
   if (req.body)
   {
     if (req.body.calltype == "REQUEST" && !(req.body.type == "name" || req.body.type == "id")) { // REQUEST DATABASE
