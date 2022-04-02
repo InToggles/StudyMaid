@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 function User() {};
 
 User.prototype = {
+
+    // =========== DEFAULT FUNCTIONS =========== //
+
     find : function(user = null, callback)
     {
         if(user) {
@@ -39,6 +42,22 @@ User.prototype = {
         }
     },
 
+    login : function(username, password, callback) {
+        this.find(username, function(user) {
+            if(user) {
+                if(bcrypt.compareSync(password, user.password)) {
+                    callback(user);
+                    return;
+                }
+            }
+            // if the username/password is wrong then return null.
+            console.log('User entered the wrong password.')
+            callback(null);
+        });
+        
+    },
+
+    // =========== CALL FROM USERS FUNCTION =========== //
 
     GetDataFromField : function(User, FieldName, callback) {
         if (User) {
@@ -56,32 +75,21 @@ User.prototype = {
         }
     },
 
-    GetClassAttendees : function(ClassID, FieldName, callback) {
-            let sql = `SELECT * FROM classattendees WHERE ${FieldName} = '${ClassID}' `;
-            pool.query(sql, ClassID, function(err, result) {
-                if(err) throw err
-                if(result.length) {
-                    callback(result);
-                }else {
-                    callback(null);
-                }
-            });
-
-    },
-
     SpecialQuery : function(callback) {
-            let sql = `SELECT * FROM users`;
+        let sql = `SELECT * FROM users`;
 
-            pool.query(sql, function(err, result) {
-                if(err) throw err
-                if(result.length) {
-                    callback(result);
-                }else {
-                    callback(null);
-                }
-            });
+        pool.query(sql, function(err, result) {
+            if(err) throw err
+            if(result.length) {
+                callback(result);
+            }else {
+                callback(null);
+            }
+        });
 
     },
+
+    // =========== CALL FROM CLASSES FUNCTION =========== //
 
     GetClassesWithOwnerID : function(ID, FieldName, callback) {
         let sql = `SELECT * FROM classes WHERE ${FieldName} = ${ID} `;
@@ -113,6 +121,21 @@ User.prototype = {
 
     },
 
+    // =========== CALL FROM CLASSATTENDEES FUNCTION =========== //
+
+    GetClassAttendees : function(ClassID, FieldName, callback) {
+            let sql = `SELECT * FROM classattendees WHERE ${FieldName} = '${ClassID}' `;
+            pool.query(sql, ClassID, function(err, result) {
+                if(err) throw err
+                if(result.length) {
+                    callback(result);
+                }else {
+                    callback(null);
+                }
+            });
+
+    },
+
     CreateNewAccount : function(body, callback) 
     {
 
@@ -128,7 +151,6 @@ User.prototype = {
                 bind.push("Default")
                 let sql = `INSERT INTO users(name, password, rank) VALUES (?, ?, ?)`;
                 pool.query(sql, bind, function(err, result) {
-                    console.log(sql)
                     if(err) throw err;
                     console.log("Successfully created a new user.")
                     callback(result.insertId);
@@ -140,20 +162,79 @@ User.prototype = {
         });
     },
 
-    login : function(username, password, callback) {
-        this.find(username, function(user) {
-            if(user) {
-                if(bcrypt.compareSync(password, user.password)) {
-                    callback(user);
-                    return;
-                }
+    FindUsersInClass : function(user, classid, callback)
+    {
+        if(user && classid) {
+        let sql = `SELECT * FROM classattendees WHERE classID = ${classid} AND id = ${user}`;
+
+
+        pool.query(sql, user, function(err, result) {
+            console.log(sql)
+            if(err) {
+                callback(null);
+                throw err
             }
-            // if the username/password is wrong then return null.
-            console.log('User entered the wrong password.')
-            callback(null);
+
+            if(result.length) {
+                callback('found');
+            }else {
+                callback(null);
+            }
         });
-        
+
+        } else {
+            callback(null)
     }
+    },
+
+    FindUserClasses : function(user, callback)
+    {
+        if(user) {
+        let sql = `SELECT * FROM classattendees WHERE id = ${user}`;
+
+
+        pool.query(sql, user, function(err, result) {
+            if(err) {
+                callback(null);
+                throw err
+            }
+
+            if(result.length) {
+                callback(result);
+            }else {
+                callback(null);
+            }
+        });
+
+        } else {
+            callback(null)
+    }
+    },
+
+    GetClassData : function(ClassID, callback)
+    {
+        if(ClassID) {
+        let sql = `SELECT * FROM classes WHERE ClassID = ${ClassID}`;
+
+
+        pool.query(sql, ClassID, function(err, result) {
+            console.log(ClassID )
+            if(err) {
+                callback(null);
+                throw err
+            }
+
+            if(result.length) {
+                callback(result);
+            }else {
+                callback(null);
+            }
+        });
+
+        } else {
+            callback(null)
+    }
+    },
 
 }
 

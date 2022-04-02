@@ -357,6 +357,11 @@ nav.close ~ .Page{
     align-content: end;
 }
 
+.TimeCounter i{
+    color: white;
+    font-size: 30px;
+}
+
 .TimeCounter {
     margin-top: 5%
 }

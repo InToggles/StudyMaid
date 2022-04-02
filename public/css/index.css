@@ -66,6 +66,18 @@ nav{
   text-align: center;
 }
 
+.text-box{
+  width: 70%;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Varela Round', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
 
 .text-box p{
   margin: 0 0 20px 0px;
@@ -107,4 +119,78 @@ nav{
 
 .nav-links ul li:hover::after {
   width: 125%
+}
+
+/* ======== SCREEN RESCALING ======== */
+
+
+
+/* Max-width : 1000px */
+@media (max-width: 1000px) { 
+  .text-box h1 {
+    font-size: 40px;
+  }
+  .text-box p {
+    font-size: 30px;
+  }
+  .text-box a {
+    font-size: 30px;
+    left: 45%;
+  }
+}
+
+/* Max-width : 780px */
+@media (max-width: 780px) { 
+  .text-box h1 {
+    font-size: 30px;
+  }
+  .text-box p {
+    font-size: 25px;
+  }
+
+  .text-box a {
+    left: 45%;
+  }
+
+}
+
+/* Max-width : 600px */
+@media (max-width: 600px) {
+  .text-box {
+    position: relative;
+    margin-top: 45%;
+  }
+  .text-box h1 {
+    font-size: 17px;
+  }
+  .text-box p {
+    font-size: 13px;
+  }
+  .text-box a {
+    left: 35%;
+  }
+}
+
+@media (max-height: 600px) {
+  .text-box {
+    position: relative;
+    margin-top: calc(100% / 5 - 20px)
+  }
+
+}
+
+@media (max-height: 500px) {
+  .text-box {
+    position: relative;
+    margin-top: calc(100% / 2)
+  }
+
+}
+
+@media (max-height: 300px) {
+  .text-box {
+    position: relative;
+    margin-top: calc(100% / 2 - 15px)
+  }
+
 }

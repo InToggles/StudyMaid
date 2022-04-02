@@ -1,11 +1,9 @@
-/* const Interval = setInterval(ChangeTimer, 1000); */
-
 // ======== VARIABLES ========= //
 
 var today = new Date();
 var hours = today.getHours()
-
 var Interval; var TimerPaused
+var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
 
 // ======== FUNCTIONS ========= //
 
@@ -47,7 +45,6 @@ function getCookie(cname) {
 
 function CallServer(Data, callback) {
   var request = new XMLHttpRequest();
-  var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
   request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       callback(this.responseText)
@@ -60,18 +57,20 @@ function CallServer(Data, callback) {
 
 function Show_Panel(type) {
   if (type == "Admin" || type == "Developer" || type == "Teacher") {
+    // -- Creating elements -- //
     const Divs = document.createElement('li')
     const a = document.createElement('a')
     const i = document.createElement('i')
     const span = document.createElement('span')
+
     span.className = "link-name"
     i.className = "uil uil-lock-access"
 
     if (type == "Admin") {
-      a.href = "#"
+      a.href = "/dashboard/admin"
       span.innerHTML = "Admin Panel"  
     } else if (type == "Teacher") {
-      a.href = "#"
+      a.href = "/dashboard/teacher"
       span.innerHTML = "Teacher Panel" 
     }
 
@@ -115,12 +114,15 @@ function LoadPage() {
   CallServer({type: "ClassOwnerID", data: DisplayData.id, name: 'nil', calltype: "GETCLASSESWITHOWNERID"}, (response)=> {
     var parsedResults = JSON.parse(response)
     for (let i = 0; i < parsedResults.length; i++) {
+
+      // -- Creating new button -- //
       const button = document.createElement('button')
       button.innerHTML = parsedResults[i].ClassName
       document.getElementById('Classes').appendChild(button)
+
       button.addEventListener("click", function() {
-        document.getElementById('Classes').hidden = true
         CallServer({type: "ClassID", data: parsedResults[i].ClassID, name: 'nil', calltype: "GETCLASSATTENDEES"}, (response2)=> {
+
           if (response2 != "No data found") {
           var ParsedResponse = JSON.parse(response2)
           document.getElementById('ClassAttendees').innerHTML = ""
@@ -134,15 +136,16 @@ function LoadPage() {
             p.innerHTML = 'No students found'
             document.getElementById('ClassAttendees').appendChild(p)
           }
+          
         })
+        
+        // -- Hiding elements -- //
+
         document.getElementById('ClassAttendees').hidden = false
+        document.getElementById('Classes').hidden = true
       })
     }
   })
-
-  //CallServer({type:'nil', data: 'nil', name: 'nil', calltype: 'CREATENEWCLASS'}, (results) => {
-    //console.log(results)
-  //})
 
   // Getting Display Data 
 

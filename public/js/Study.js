@@ -2,8 +2,8 @@
 
 var today = new Date();
 var hours = today.getHours()
-
 var Interval; var TimerPaused
+var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
 
 // ======== FUNCTIONS ========= //
 
@@ -43,23 +43,17 @@ function getCookie(cname) {
     return "nil";
   }
 
-function GetUserDisplayData(_callback) {
-  var request = new XMLHttpRequest();
-  var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
-  request.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      _callback(this.responseText)
-   }
-};
-  request.open("POST", path, false); // true = asynchronous
-  request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-  var data = {
-    data: getCookie('token'),
-    type: "token",
-    calltype: "REQUEST"
+  function CallServer(Data, callback) {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        callback(this.responseText)
+     }
+  };
+    request.open("POST", path, false); // true = asynchronous
+    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    request.send(JSON.stringify(Data))
   }
-  request.send(JSON.stringify(data))
-}
 
 function Show_Panel(type) {
   if (type == "Admin" || type == "Developer" || type == "Teacher") {
@@ -71,10 +65,10 @@ function Show_Panel(type) {
     i.className = "uil uil-lock-access"
 
     if (type == "Admin") {
-      a.href = "dashboard/admin"
+      a.href = "/dashboard/admin"
       span.innerHTML = "Admin Panel"  
     } else if (type == "Teacher") {
-      a.href = "dashboard/teacher"
+      a.href = "/dashboard/teacher"
       span.innerHTML = "Teacher Panel" 
     }
 
@@ -90,6 +84,9 @@ function timerrunout() {
   document.getElementById('cdtime').hidden = true;
   document.getElementById('starttimer').hidden = false;
   document.getElementById('endtimer').hidden = true;
+  document.getElementById('pausetimer').hidden = true;
+  document.getElementById('pausebutton').className = 'uil uil-pause'
+  TimerPaused = false
 }
 
 // ======== CLASSES ========= //
@@ -138,7 +135,7 @@ function LoadPage() {
   // Getting Display Data 
   var DisplayData
 
-  GetUserDisplayData((response)=>{
+  CallServer({type: "token", data: getCookie('token'), name: 'nil', calltype: "REQUEST"}, (response)=> {
     DisplayData = JSON.parse(response)
   })
 
@@ -156,7 +153,6 @@ function LoadPage() {
   // StartTimer click function
   
   document.getElementById('starttimer').addEventListener("click", function(){
-    document.getElementById('countdownsettings').hidden = true;
     var hr = document.getElementById('hrinput').value; var min = document.getElementById('mininput').value; var sec = document.getElementById('secinput').value;
     if (hr > 24) {
       hr = 24
@@ -176,13 +172,15 @@ function LoadPage() {
     const totaltime = parseInt(hr * 3600) + parseInt(min * 60) + parseInt(sec)
     console.log((hr * 3600) + (min * 60) + sec)
     console.log((hr * 3600), (min * 60), sec)
+    if (totaltime > 0) {
     Clock.startcountdown(totaltime)
     Clock.updatecountdown(totaltime)
+    document.getElementById('countdownsettings').hidden = true;
     document.getElementById('cdtime').hidden = false;
     document.getElementById('endtimer').hidden = false;
     document.getElementById('pausetimer').hidden = false;
     document.getElementById('starttimer').hidden = true;
-
+    }
   });
 
   // EndTimer click function
@@ -196,9 +194,10 @@ function LoadPage() {
   document.getElementById('pausetimer').addEventListener("click", function(){
       TimerPaused = !TimerPaused
       if (TimerPaused) {
-        document.getElementById('pausetimer').innerHTML = "UNPAUSE"
+        document.getElementById('pausebutton').className = 'uil uil-play'
       } else {
-        document.getElementById('pausetimer').innerHTML = "PAUSE"
+        console.log('potato.')
+        document.getElementById('pausebutton').className = 'uil uil-pause'
       }
   });
 

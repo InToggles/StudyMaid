@@ -1,105 +1,105 @@
 /* Navigation Panel */
 
 * {
-  margin: 0;
-  padding: 0;
-}
+    margin: 0;
+    padding: 0;
+  }
 
 
 nav{
-  display: flex;
-  padding: 2% 6%;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
-  opacity: 70%;
-}
-
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    opacity: 70%;
+  }
+  
 .nav-links{
-  flex: 1;
-  text-align: right;
+    flex: 1;
+    text-align: right;
 }
-
+  
 .nav-links ul li{
-  list-style: none;
-  display: inline-block;
-  padding: 8px 15px;
-  position: relative;
-}
+    list-style: none;
+    display: inline-block;
+    padding: 8px 15px;
+    position: relative;
+  }
+  
+  .nav-links ul li a{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Varela Round', sans-serif;
+  }
+  
+  .nav-links ul li::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: red;
+    display: block;
+    margin: 5% -10%;
+    transition: 0.5s;
+  }
+  
+  .nav-links ul li:hover::after {
+    width: 125%
+  }
 
-.nav-links ul li a{
-  color: white;
-  font-size: 20px;
-  text-decoration: none;
-  font-family: 'Varela Round', sans-serif;
-}
-
-.nav-links ul li::after {
-  content: "";
-  width: 0%;
-  height: 2px;
-  background: red;
-  display: block;
-  margin: 5% -10%;
-  transition: 0.5s;
-}
-
-.nav-links ul li:hover::after {
-  width: 125%
-}
-
-/* Login */
+  /* Login */
 
 .loginform {
-  max-width: 300px; max-height: 500px;
-  width: 300px;
-  height: 500px;
-  background-color: transparent;
-  position: relative;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: 'Varela Round', sans-serif;
+    max-width: 300px; max-height: 500px;
+    width: 300px;
+    height: 500px;
+    background-color: transparent;
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Varela Round', sans-serif;
 }
 
 .loginform input{
-  border-color: rgb(82, 82, 82);
-  border-style: solid;
-  width: 300px;
-  height: 40px;
-  outline: none;
-  margin-top: 10%;
-  padding: 10px 20px 10px 10px;
-  border-radius: 5px;
-  color: rgba(0,0,0,0.3);
-  font-size: 15px;
+    border-color: rgb(82, 82, 82);
+    border-style: solid;
+    width: 300px;
+    height: 40px;
+    outline: none;
+    margin-top: 10%;
+    padding: 10px 20px 10px 10px;
+    border-radius: 5px;
+    color: rgba(0,0,0,0.3);
+    font-size: 15px;
 }
 
 
 .logo {
-  width: 200px;
-  height: 200px;
-  background-size: 200px;
-  background-position: center;
-  background-image: url("../imgs/Maid.jpg");
-  margin-top: 5%;
-  margin-left: 15%;
-  margin-bottom: 5%;
+    width: 200px;
+    height: 200px;
+    background-size: 200px;
+    background-position: center;
+    background-image: url("../imgs/Maid.jpg");
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-bottom: 5%;
 }
 
 .registerbutton {
-  font-size: 20px;
-  font-family: 'Varela Round', sans-serif;
+    font-size: 20px;
+    font-family: 'Varela Round', sans-serif;
 }
 
 .registerbutton {
-  background-color: rgb(0, 140, 255);
-  padding: 10px 10px 10px 10px;
-  border: none;
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  margin-top: 8%;
-  margin-left: 25%;
-  position: relative;
-  width: 150px;
+    background-color: rgb(0, 140, 255);
+    padding: 10px 10px 10px 10px;
+    border: none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-top: 8%;
+    margin-left: 25%;
+    position: relative;
+    width: 150px;
 }

@@ -1,9 +1,8 @@
-/* const Interval = setInterval(ChangeTimer, 1000); */
-
 // ======== VARIABLES ========= //
 
 var today = new Date();
 var hours = today.getHours()
+const path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
 
 var Interval; var TimerPaused
 
@@ -47,7 +46,6 @@ function getCookie(cname) {
 
 function CallServer(Data, callback) {
   var request = new XMLHttpRequest();
-  var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
   request.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       callback(this.responseText)
@@ -55,13 +53,8 @@ function CallServer(Data, callback) {
 };
   request.open("POST", path, false); // true = asynchronous
   request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-  var SendData = {
-    data: Data.data,
-    type: Data.type,
-    name: Data.name,
-    calltype: Data.calltype
-  }
-  request.send(JSON.stringify(SendData))
+
+  request.send(JSON.stringify(Data))
 }
 
 function Show_Panel(type) {
@@ -71,16 +64,15 @@ function Show_Panel(type) {
     const i = document.createElement('i')
     const span = document.createElement('span')
     span.className = "link-name"
-    i.className = "uil uil-chart"
+    i.className = "uil uil-lock-access"
 
     if (type == "Admin") {
-      a.href = "dashboard/admin"
+      a.href = "/dashboard/admin"
       span.innerHTML = "Admin Panel"  
     } else if (type == "Teacher") {
-      a.href = "dashboard/teacher"
+      a.href = "/dashboard/teacher"
       span.innerHTML = "Teacher Panel" 
     }
-
     const c = document.getElementById('nav-links').appendChild(Divs).appendChild(a)
     c.appendChild(i)
     c.appendChild(span)
@@ -121,7 +113,13 @@ function LoadPage() {
   // Getting Display Data 
 
   if (DisplayData.token == getCookie('token')) {
-    Show_Panel(DisplayData.rank)
+    console.log(DisplayData.rank)
+    if (DisplayData.rank == 'Teacher' || DisplayData.rank == "Admin") {
+
+    } else {
+      window.location.href = '/dashboard';
+      Show_Panel(DisplayData.rank)
+    }
   }
 
   CallServer({type:'nil', data: 'nil', name: 'nil', calltype: 'GETALLUSERS'}, (results) => {

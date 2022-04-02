@@ -1,6 +1,7 @@
 var today = new Date();
 var hours = today.getHours()
 var DisplayData
+var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
 
 var message = ""
 
@@ -46,9 +47,9 @@ function getCookie(cname) {
     return "nil";
   }
 
+
 function GetUserDisplayData(_callback) {
   var request = new XMLHttpRequest();
-  var path = "http://127.0.0.1:3000/"; // enter your server ip and port number
   request.onreadystatechange = function() {
     console.log(this)
     if (this.readyState == 4 && this.status == 200) {
@@ -76,10 +77,10 @@ function Show_Panel(type) {
     i.className = "uil uil-chart"
 
     if (type == "Admin") {
-      a.href = "dashboard/admin"
+      a.href = "/dashboard/admin"
       span.innerHTML = "Admin Panel"  
     } else if (type == "Teacher") {
-      a.href = "dashboard/teacher"
+      a.href = "/dashboard/teacher"
       span.innerHTML = "Teacher Panel" 
     }
 

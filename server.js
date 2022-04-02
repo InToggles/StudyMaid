@@ -26,22 +26,18 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
 app.use(cookieParser());
-app.keys = ['dieueyf7huienejnfef']
 app.use(cookieSession({
   secret: process.env.SESSION_SECRET,
-  signed: false,
   saveUninitialized: true,
   resave: true
 }));
 
 
-
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
-  secret: 'SESSIONSECRET',
+  secret: process.env.SESSION_SECRET,
   resave: false,
-  signed: false,
   saveUninitialized: false
 }))
 
@@ -68,6 +64,8 @@ function RequestData(Data, Field, Callback) {
   user.GetDataFromField(Data, Field, function(result) {
     if(result) {
       Callback(result[0])
+    } else {
+      Callback(null)
     }
 })  
 }
@@ -75,6 +73,7 @@ function RequestData(Data, Field, Callback) {
 // ========= CLIENT REQUEST HANDLER ========= //
 
 app.post("/",  (req, res, next) => { 
+  
   if (req.body)
   {
     if (req.body.calltype == "REQUEST" && !(req.body.type == "name" || req.body.type == "id")) { // REQUEST DATABASE
@@ -117,7 +116,23 @@ app.post("/",  (req, res, next) => {
           res.send("No data found")
         }
       })
-    }
+    } else if (req.body.calltype == "FINDCLASSES") { // FINDS THE CLASSES THE STUDENTS ARE IN
+        user.FindUserClasses(req.body.id, (callback) => {
+            if (callback) {
+              res.send(callback)
+            } else {
+              res.send(null)
+            }
+        })
+      } else if (req.body.calltype == "GETCLASSDATA") { // Gets the description of the class
+        user.GetClassData(req.body.ClassID, (callback) => {
+            if (callback) {
+              res.send(callback[0])
+            } else {
+              res.send(null)
+            }
+        })
+      }
   }
 })
 
@@ -209,9 +224,6 @@ app.post('/login',(req, res, next) => {
 
           req.session.user = result;
           req.session.opp = 1;
-
-          console.log(getfieldresult[0].name + " has logged onto the server.")
-
           res.redirect("/dashboard")
         })
       }
@@ -238,7 +250,7 @@ app.get('/settings', AuthToken,(req, res, next) => {
   res.render("login.ejs", {})
 })
 
-app.get('/study', AuthToken,(req, res, next) => {
+app.get('/study', AuthToken, (req, res, next) => {
   let user = req.session.user;
 
   if(user) {
@@ -257,9 +269,6 @@ app.post('/register', (req, res, next) => {
     name: req.body.name,
     password: req.body.password
   };
-
-  console.log('Registering user. Data : ', userInput)
-
   user.CreateNewAccount(userInput, function(lastId) {
     if(lastId) {
         user.find(lastId, function(result) {
@@ -274,6 +283,28 @@ app.post('/register', (req, res, next) => {
   });
 })
 
-app.listen(process.env.PORT || 3306, () => {
+app.get('/class', AuthToken, (req, res, next) => {
+  res.render('classpage.html')
+})
+
+app.get('/class/id=*', AuthToken, (req, res, next) => {
+  const token = req.cookies.token
+  console.log('grapeeee')
+  RequestData(token, 'token', (result) =>{
+    if(result) {
+      user.FindUsersInClass(result.id, req.url.split('id=')[1], (callback) => {
+        if (callback) {
+          console.log('grapeeee')
+          res.render('class2.html')
+        } else {
+          res.redirect('/class')
+        }
+      })
+    }
+  })
+})
+
+
+app.listen(3000, () => {
 
 })
