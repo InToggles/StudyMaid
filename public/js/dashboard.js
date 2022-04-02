@@ -10,8 +10,10 @@ if (hours >= 0 && hours < 7) {
     message = "Good morning, ";
 } else if (hours >= 12 && hours < 19) {
     message = "Good afternoon, "
-} else if (hours > 19) {
+} else if (hours >= 19) {
   message = "Good evening, "
+} else {
+  message = "Welcome back, "
 }
 
 function converttime(timeinseconds, callback) {
@@ -46,7 +48,7 @@ function getCookie(cname) {
 
 function GetUserDisplayData(_callback) {
   var request = new XMLHttpRequest();
-  var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
+  var path = "http://127.0.0.1:3000/"; // enter your server ip and port number
   request.onreadystatechange = function() {
     console.log(this)
     if (this.readyState == 4 && this.status == 200) {
@@ -71,7 +73,7 @@ function Show_Panel(type) {
     const i = document.createElement('i')
     const span = document.createElement('span')
     span.className = "link-name"
-    i.className = "uil uil-lock-access"
+    i.className = "uil uil-chart"
 
     if (type == "Admin") {
       a.href = "dashboard/admin"
@@ -86,6 +88,8 @@ function Show_Panel(type) {
     c.appendChild(span)
   }
 }
+
+console.log(message)
 
 if (message) {
 
@@ -131,14 +135,22 @@ if (message) {
     document.getElementById('userrankbox').style.backgroundColor = 'rgb(255, 66, 117)'
   } else if (DisplayData.rank == "Head Maid"){
     document.getElementById('userrankbox').style.backgroundColor = 'rgb(66, 255, 183)'
-  } else if (DisplayData.rank == "Faith"){
-    document.getElementById('userrankbox').style.backgroundColor = 'rgb(0, 255, 149)'
   }
 
   if (DisplayData.token == getCookie('token')) {
     Show_Panel(DisplayData.rank)
   }
 
+  function generate() {
+    let id = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+    }
+      console.log(id())
+    }
+
+    generate()
 }
 
 /* const Interval = setInterval(ChangeTimer, 1000); */
