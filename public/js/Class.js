@@ -52,9 +52,9 @@ function getCookie(cname) {
   };
     request.open("POST", path, false); // true = asynchronous
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+  
     request.send(JSON.stringify(Data))
   }
-
 function Show_Panel(type) {
   if (type == "Admin" || type == "Developer" || type == "Teacher") {
     const Divs = document.createElement('li')
@@ -89,6 +89,8 @@ function LoadPage() {
   })
 
   CallServer({id: DisplayData.id, calltype: "FINDCLASSES"}, (response)=> {
+    if (response != "") {
+      
     var ParsedData = JSON.parse(response)
     console.log(ParsedData)
     for (var i = 0; i < ParsedData.length; i++) {
@@ -119,6 +121,7 @@ function LoadPage() {
       })
 
     }
+  }
   })
 
   // Getting Display Data 
