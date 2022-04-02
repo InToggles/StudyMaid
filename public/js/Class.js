@@ -106,7 +106,7 @@ function LoadPage() {
       const Div = document.createElement('div')
       Div.className = 'ClassElement'
       const ClassName = document.createElement('p')
-      ClassName.innerHTML = ParsedData[i].classname
+      ClassName.innerHTML = ParsedData[i].ClassName
       ClassName.id = "ClassName"
       console.log(ClassName.innerHTML)
       const ClassDescription = document.createElement('p')
