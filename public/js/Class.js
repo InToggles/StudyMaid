@@ -3,7 +3,7 @@
 var today = new Date();
 var hours = today.getHours()
 var Interval; var TimerPaused
-var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
+var path = "http://127.0.0.1:3000/"; // enter your server ip and port number
 
 // ======== FUNCTIONS ========= //
 
@@ -52,9 +52,9 @@ function getCookie(cname) {
   };
     request.open("POST", path, false); // true = asynchronous
     request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-  
     request.send(JSON.stringify(Data))
   }
+
 function Show_Panel(type) {
   if (type == "Admin" || type == "Developer" || type == "Teacher") {
     const Divs = document.createElement('li')
@@ -84,13 +84,15 @@ function LoadPage() {
   // Getting Display Data 
   var DisplayData
 
+  CallServer({calltype: "HI"}, (response) => {
+    console.log(response)
+  })
+
   CallServer({type: "token", data: getCookie('token'), name: 'nil', calltype: "REQUEST"}, (response)=> {
     DisplayData = JSON.parse(response)
   })
 
   CallServer({id: DisplayData.id, calltype: "FINDCLASSES"}, (response)=> {
-    if (response != "") {
-      
     var ParsedData = JSON.parse(response)
     console.log(ParsedData)
     for (var i = 0; i < ParsedData.length; i++) {
@@ -106,7 +108,7 @@ function LoadPage() {
       const Div = document.createElement('div')
       Div.className = 'ClassElement'
       const ClassName = document.createElement('p')
-      ClassName.innerHTML = ParsedData[i].ClassName
+      ClassName.innerHTML = ParsedData[i].classname
       ClassName.id = "ClassName"
       console.log(ClassName.innerHTML)
       const ClassDescription = document.createElement('p')
@@ -121,7 +123,6 @@ function LoadPage() {
       })
 
     }
-  }
   })
 
   // Getting Display Data 
@@ -132,3 +133,8 @@ function LoadPage() {
 }
 
 LoadPage()
+
+/* ========= SIDE BAR CLOSING BUTTON ========= */
+document.getElementById('closebutton').addEventListener("click", function() {
+  document.getElementById('sidebar').classList.toggle('close')
+})

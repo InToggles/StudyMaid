@@ -3,7 +3,7 @@
 var today = new Date();
 var hours = today.getHours()
 var Interval; var TimerPaused
-var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
+var path = "http://127.0.0.1:3000"; // enter your server ip and port number
 
 // ======== FUNCTIONS ========= //
 
@@ -135,13 +135,15 @@ function LoadPage() {
   // Getting Display Data 
   var DisplayData
 
-  CallServer({type: "token", data: getCookie('token'), name: 'nil', calltype: "REQUEST"}, (response)=> {
+  CallServer({type: "Token", data: getCookie('token'), field: 'Users', calltype: "REQUEST"}, (response)=> {
     DisplayData = JSON.parse(response)
   })
 
+console.log(DisplayData)
+
   // Getting Display Data 
 
-  if (DisplayData.token == getCookie('token')) {
+  if (DisplayData.Token == getCookie('token')) {
     Show_Panel(DisplayData.rank)
   }
 
@@ -204,3 +206,8 @@ function LoadPage() {
 }
 
 LoadPage()
+
+/* ========= SIDE BAR CLOSING BUTTON ========= */
+document.getElementById('closebutton').addEventListener("click", function() {
+  document.getElementById('sidebar').classList.toggle('close')
+})

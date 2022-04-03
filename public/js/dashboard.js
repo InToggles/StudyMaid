@@ -1,7 +1,7 @@
 var today = new Date();
 var hours = today.getHours()
 var DisplayData
-var path = "https://studymaid.herokuapp.com/"; // enter your server ip and port number
+var path = "http://127.0.0.1:3000/"; // enter your server ip and port number
 
 var message = ""
 
@@ -40,7 +40,6 @@ function getCookie(cname) {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
-        console.log('got cookie')
         return c.substring(name.length, c.length);
       }
     }
@@ -48,24 +47,17 @@ function getCookie(cname) {
   }
 
 
-function GetUserDisplayData(_callback) {
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    console.log(this)
-    if (this.readyState == 4 && this.status == 200) {
-      console.log('fasdg')
-      _callback(this.responseText)
-   }
-};
-  request.open("POST", path, false); // true = asynchronous
-  request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
-  var data = {
-    data: getCookie('token'),
-    type: "token",
-    calltype: "REQUEST"
+  function CallServer(Data, callback) {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        callback(this.responseText)
+     }
+  };
+    request.open("POST", path, false); // true = asynchronous
+    request.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    request.send(JSON.stringify(Data))
   }
-  request.send(JSON.stringify(data))
-}
 
 function Show_Panel(type) {
   if (type == "Admin" || type == "Developer" || type == "Teacher") {
@@ -90,11 +82,8 @@ function Show_Panel(type) {
   }
 }
 
-console.log(message)
 
 if (message) {
-
-  console.log('c')
 
   const quotes = [
     "One day, all your hard work will pay off.",
@@ -105,17 +94,13 @@ if (message) {
 
   var Message
 
-  GetUserDisplayData((response)=>{
+  CallServer({type: "Token", data: getCookie('token'), field: 'Users/', calltype: "REQUEST"}, (response)=> {
     DisplayData = JSON.parse(response)
   })
 
-  console.log(DisplayData)
-
-  converttime(DisplayData.totalstudytime, (response) => {
-    console.log(response)
+  converttime(DisplayData.TotalStudyTime, (response) => {
     if (response.Hours < 0 && response.Minutes < 1 ){
       Message = response.Seconds + "S"
-      console.log(Message)
     } else if (response.Hours >= 1 && response.Minutes >= 1) {
       Message = response.Hours + "H " + response.Minutes + "M"
     } else if (response.Hours < 1 && response.Minutes >= 1) {
@@ -123,35 +108,25 @@ if (message) {
     } else {
       Message = response.Seconds + "S"
     }
-    console.log(Message)
     document.getElementById('studytime').innerHTML = Message;
   })
 
-  console.log(DisplayData)
 
-  document.getElementById('greet').innerHTML = message + DisplayData.name + ".";
+  document.getElementById('greet').innerHTML = message + DisplayData.Name + ".";
   document.getElementById('qotd').innerHTML = "'" + quotes[Math.floor(Math.random() * (quotes.length))] + "'";
-  document.getElementById('userrank').innerHTML = DisplayData.rank;
-  if (DisplayData.rank == "Admin"){
+  document.getElementById('userrank').innerHTML = DisplayData.Role;
+  if (DisplayData.Role == "Admin"){
     document.getElementById('userrankbox').style.backgroundColor = 'rgb(255, 66, 117)'
-  } else if (DisplayData.rank == "Head Maid"){
+  } else if (DisplayData.Role == "Head Maid"){
     document.getElementById('userrankbox').style.backgroundColor = 'rgb(66, 255, 183)'
   }
 
-  if (DisplayData.token == getCookie('token')) {
-    Show_Panel(DisplayData.rank)
+  if (DisplayData.Token == getCookie('token')) {
+    Show_Panel(DisplayData.Role)
   }
-
-  function generate() {
-    let id = () => {
-      return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16)
-          .substring(1);
-    }
-      console.log(id())
-    }
-
-    generate()
 }
 
-/* const Interval = setInterval(ChangeTimer, 1000); */
+/* ========= SIDE BAR CLOSING BUTTON ========= */
+document.getElementById('closebutton').addEventListener("click", function() {
+  document.getElementById('sidebar').classList.toggle('close')
+})

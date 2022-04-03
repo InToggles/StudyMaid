@@ -15,7 +15,7 @@
 
 
 <body>
-<nav>
+<nav id="sidebar" class="close">
     <div class="menu-items">
         <ul class="nav-links" id="nav-links">
             <li><a href="/dashboard">
@@ -46,7 +46,12 @@
     </div>
 </nav>
 
-<section class="Page">
+<section class="dashboard">
+
+    <div class="top">
+        <i class="uil uil-bars sidebar-toggle" id="closebutton"></i>
+    </div>
+
     <div class="Timer" id="Timer">
         <div class ="TimeCounter" id="TimeCounter">
             <div><span id="currenttime">0</span></div>

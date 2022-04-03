@@ -1,0 +1,54 @@
+<html>
+
+    <link href="css/NewLogin.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <body>
+        <section>
+            <nav>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="/" class="btn home">Home</a></li>
+                        <li><a href="#" class="btn login">Login</a></li>
+                    </ul>
+                </nav>
+            </nav>
+        </section>
+
+        <div class="LoginDiv">
+            <form action="/Login" method="POST">
+
+            <div class="title">
+                <p>LOGIN</p>
+            </div>
+            <div class="inputs">
+                <div>
+                    <span>
+                        <i class="uil uil-user"></i>
+                    </span>
+                    <input type="text" name="name" placeholder="Username">
+                </div>
+                <hr>
+                <div>
+                    <span>
+                        <i class="uil uil-lock"></i>
+                    </span>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <button class="loginbutton" type="submit">Login</button>
+            
+            <div class="registerbutton">
+                <a href="register">Do not have an account?</a>
+            </div>
+        </form>
+
+        </section>
+
+    </body>
+
+</html>

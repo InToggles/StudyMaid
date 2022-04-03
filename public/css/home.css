@@ -64,6 +64,8 @@ body.dark .activity-data::-webkit-scrollbar-thumb:hover{
     background: #3A3B3C;
 }
 
+/* ======== NAV BAR ========*/
+
 nav{
     position: fixed;
     top: 0;
@@ -134,9 +136,8 @@ nav .menu-items{
 .menu-items li a .link-name{
     font-size: 18px;
     font-weight: 400;
-    color: #000000;
+    color: var(--black-light-color);    
     transition: var(--tran-05);
-    z-index: 1000;
 }
 nav.close li a .link-name{
     opacity: 0;
@@ -154,43 +155,11 @@ body.dark .nav-links li a:hover .link-name{
     padding-top: 10px;
     border-top: 1px solid var(--border-color);
 }
-.menu-items .mode{
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-.menu-items .mode-toggle{
-    position: absolute;
-    right: 14px;
-    height: 50px;
-    min-width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.dashboard .top .sidebar-toggle{
+    font-size: 26px;
+    color: var(--text-color);
     cursor: pointer;
-}
-.mode-toggle .switch{
-    position: relative;
-    display: inline-block;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-}
-.switch:before{
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 15px;
-    width: 15px;
-    background-color: var(--panel-color);
-    border-radius: 50%;
-    transition: var(--tran-03);
-}
-body.dark .switch:before{
-    left: 20px;
 }
 
 .dashboard{
@@ -206,36 +175,8 @@ nav.close ~ .dashboard{
     left: 73px;
     width: calc(100% - 73px);
 }
-.dashboard .top{
-    position: fixed;
-    top: 0;
-    left: 250px;
-    display: flex;
-    width: calc(100% - 250px);
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    background-color: #fff;
-    transition: var(--tran-05);
-    z-index: 10;
-}
-nav.close ~ .dashboard .top{
-    left: 73px;
-    width: calc(100% - 73px);
-}
-.dashboard .top .sidebar-toggle{
-    font-size: 26px;
-    color: var(--text-color);
-    cursor: pointer;
-}
-.dashboard .top{
-    position: relative;
-    height: 45px;
-    max-width: 600px;
-    width: 100%;
-    margin: 0 30px;
-}
 
+/* ========= NAVIGATION BAR END ============= */
 
 .dashboard .dash-content{
     padding-top: 50px;

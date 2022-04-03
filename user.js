@@ -17,9 +17,12 @@ User.prototype = {
 
 
         pool.query(sql, user, function(err, result) {
-            if(err) throw err
+            if(err) {
+                callback(null)
+                return
+            }
 
-            if(result.length) {
+            if(result.length && !err) {
                 callback(result[0]);
             }else {
                 callback(null);
@@ -54,7 +57,6 @@ User.prototype = {
             console.log('User entered the wrong password.')
             callback(null);
         });
-        
     },
 
     // =========== CALL FROM USERS FUNCTION =========== //
@@ -149,8 +151,7 @@ User.prototype = {
                     bind.push(body[prop]);
                 }
                 bind.push("Default")
-                bind.push("0")
-                let sql = `INSERT INTO users(name, password, rank, token) VALUES (?, ?, ?, ?)`;
+                let sql = `INSERT INTO users(name, password, rank) VALUES (?, ?, ?)`;
                 pool.query(sql, bind, function(err, result) {
                     if(err) throw err;
                     console.log("Successfully created a new user.")

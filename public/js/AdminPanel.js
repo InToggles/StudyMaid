@@ -169,3 +169,8 @@ function LoadPage() {
 }
 
 LoadPage()
+
+/* ========= SIDE BAR CLOSING BUTTON ========= */
+document.getElementById('closebutton').addEventListener("click", function() {
+  document.getElementById('sidebar').classList.toggle('close')
+})
